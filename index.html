@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My Love My Rishi</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css?family=Raleway:400,400i,700");
+
+    * {
+      padding: 0;
+      margin: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Raleway, sans-serif;
+      background-color: #000;
+      color: #fff;
+      font-size: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start; /* Allow scrolling from the top */
+      align-items: center;
+      min-height: 100vh;
+      overflow-y: auto; /* Enables vertical scrolling */
+      padding: 20px; /* Optional, adds some padding to the body */
+    }
+
+    canvas {
+      display: block;
+    }
+
+    h1 {
+      position: absolute;
+      top: 20%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-family: "Source Sans Pro";
+      font-size: 5em;
+      font-weight: 900;
+      -webkit-user-select: none;
+      user-select: none;
+    }
+    
+    .content {
+      width: 95%;
+      max-width: 40ch;
+      padding: 1em;
+      text-align: center;
+      margin-bottom: 2em;
+    }
+
+    .marquee {
+      position: relative;
+      width: 100%;
+      height: 2em;
+      font-size: 5em;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      margin-bottom: 2em;
+    }
+
+    .marquee_text {
+      position: absolute;
+      min-width: 100%;
+      white-space: nowrap;
+      -webkit-animation: marquee 16s infinite linear;
+      animation: marquee 16s infinite linear;
+    }
+
+    @-webkit-keyframes marquee {
+      from {
+        translate: 70%;
+      }
+      to {
+        translate: -70%;
+      }
+    }
+
+    @keyframes marquee {
+      from {
+        translate: 70%;
+      }
+      to {
+        translate: -70%;
+      }
+    }
+
+    .marquee_blur {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      background-color: black;
+      background-image: linear-gradient(to right, white, 1rem, transparent 50%), linear-gradient(to left, white, 1rem, transparent 50%);
+      filter: contrast(15);
+    }
+
+    .marquee_blur p {
+      filter: blur(0.07em);
+    }
+
+    .marquee_clear {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2em;
+      width: 100%;
+      height: auto;
+    }
+
+    .image {
+      perspective: 3000px;
+      width: 50%;
+      transform-style: preserve-3d;
+      margin-bottom: 2em;
+    }
+
+    .image img {
+      transform: rotateX(70deg) rotateZ(-60deg) translate3d(-120px, 0px, 70px);
+      box-shadow: -80px 60px 15px 5px rgba(0, 0, 0, 0.4);
+      transition: all 0.4s;
+      transform-style: preserve-3d;
+    }
+
+    .image:hover img {
+      transform: rotateX(0deg) rotateZ(0deg) translate3d(0px, 0px, 0px);
+      box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0);
+    }
+
+    .text {
+      margin-top: 2em;
+      margin-bottom: 2em;
+    }
+
+    /* Animation and Transition for "The Day My Rishi Was Born" text */
+    .borntxt {
+      font-size: 3rem;
+      font-weight: 700;
+      color: #fff;
+      opacity: 0;
+      transform: translateY(50px);
+      animation: fadeInUp 2s ease-out forwards;
+      text-align: center;
+      margin-top: 2em;
+    }
+
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Animation for the borntt paragraph */
+    .borntt {
+      font-size: 1.5rem;
+      color: #fff;
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUpDelay 3s ease-out forwards;
+      text-align: center;
+      margin-top: 1em;
+    }
+
+    @keyframes fadeInUpDelay {
+      0% {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .birth{
+        align-items: center;
+        justify-content: center;
+        display: flex;
+        padding-top: 40rem;
+        text-align: center;
+    }
+    audio {
+        justify-items: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="birthday">
+    <h1 class="birth">Happy Birthday Rishika Ji <br> <audio controls autoplay>
+        <source src="rj.mpeg" type="audio/mpeg">
+        Your browser does not support the audio element.
+      </audio> </h1>
+
+    <canvas id="birthday"></canvas>
+  </div>
+  <div class="content">
+    <div class="marquee">
+      <div class="marquee_blur" aria-hidden="true">
+        <p class="marquee_text">My Only Love, My Rishi</p>
+      </div>
+      <div class="marquee_clear">
+        <p class="marquee_text">My Only Love, My Rishi</p>
+      </div>
+    </div>
+
+    <p class="text">
+      This is you my love when I imagine you in our pahadi dress, you are always as beautiful as you are from inside, my love.
+    </p>
+  </div>
+
+  <div class="container">
+    <!-- First Image -->
+    <div class="image">
+      <img src="rji.jpeg" alt="Minimalist Landscape">
+    </div>
+
+    <div class="born">
+      <h2 class="borntxt">
+        How I explain you, how much I love you dear
+      </h2>
+      <p class="borntt">
+        My love for you is as pure a love a mother has for her child, there is no explanation why it is so but what it is, it is. If I could be there, I would want to do many things for you. This is just a small try to show how much I love you. I hope you will like it.
+      </p>
+    </div>
+
+    <!-- Second Image -->
+    <div class="image">
+      <img src="rj.jpeg" alt="Another Image">
+    </div>
+
+ 
+
+  <script>
+    // helper functions
+    const PI2 = Math.PI * 2
+    const random = (min, max) => Math.random() * (max - min + 1) + min | 0
+    const timestamp = _ => new Date().getTime()
+
+    // container
+    class Birthday {
+      constructor() {
+        this.resize()
+
+        // create a lovely place to store the firework
+        this.fireworks = []
+        this.counter = 0
+      }
+
+      resize() {
+        this.width = canvas.width = window.innerWidth
+        let center = this.width / 2 | 0
+        this.spawnA = center - center / 4 | 0
+        this.spawnB = center + center / 4 | 0
+
+        this.height = canvas.height = window.innerHeight
+        this.spawnC = this.height * .1
+        this.spawnD = this.height * .5
+      }
+
+      onClick(evt) {
+        let x = evt.clientX || evt.touches && evt.touches[0].pageX
+        let y = evt.clientY || evt.touches && evt.touches[0].pageY
+
+        let count = random(3,5)
+        for(let i = 0; i < count; i++) this.fireworks.push(new Firework(
+          random(this.spawnA, this.spawnB),
+          this.height,
+          x,
+          y,
+          random(0, 260),
+          random(30, 110)))
+
+        this.counter = -1
+      }
+
+      update(delta) {
+        ctx.globalCompositeOperation = 'hard-light'
+        ctx.fillStyle = `rgba(20,20,20,${ 7 * delta })`
+        ctx.fillRect(0, 0, this.width, this.height)
+
+        ctx.globalCompositeOperation = 'lighter'
+        for (let firework of this.fireworks) firework.update(delta)
+
+        // if enough time passed... create new new firework
+        this.counter += delta * 3 // each second
+        if (this.counter >= 1) {
+          this.fireworks.push(new Firework(
+            random(this.spawnA, this.spawnB),
+            this.height,
+            random(0, this.width),
+            random(this.spawnC, this.spawnD),
+            random(0, 360),
+            random(30, 110)))
+          this.counter = 0
+        }
+
+        // remove the dead fireworks
+        if (this.fireworks.length > 1000) this.fireworks = this.fireworks.filter(firework => !firework.dead)
+      }
+    }
+
+    class Firework {
+      constructor(x, y, targetX, targetY, shade, offsprings) {
+        this.dead = false
+        this.offsprings = offsprings
+
+        this.x = x
+        this.y = y
+        this.targetX = targetX
+        this.targetY = targetY
+
+        this.shade = shade
+        this.history = []
+      }
+
+      update(delta) {
+        if (this.dead) return
+
+        let xDiff = this.targetX - this.x
+        let yDiff = this.targetY - this.y
+        if (Math.abs(xDiff) > 3 || Math.abs(yDiff) > 3) { // is still moving
+          this.x += xDiff * 2 * delta
+          this.y += yDiff * 2 * delta
+
+          this.history.push({
+            x: this.x,
+            y: this.y
+          })
+
+          if (this.history.length > 20) this.history.shift()
+        } else {
+          if (this.offsprings && !this.madeChilds) {
+            let babies = this.offsprings / 2
+            for (let i = 0; i < babies; i++) {
+              let targetX = this.x + this.offsprings * Math.cos(PI2 * i / babies) | 0
+              let targetY = this.y + this.offsprings * Math.sin(PI2 * i / babies) | 0
+
+              birthday.fireworks.push(new Firework(this.x, this.y, targetX, targetY, this.shade, 0))
+            }
+          }
+          this.madeChilds = true
+          this.history.shift()
+        }
+
+        if (this.history.length === 0) this.dead = true
+        else if (this.offsprings) {
+          for (let i = 0; this.history.length > i; i++) {
+            let point = this.history[i]
+            ctx.beginPath()
+            ctx.fillStyle = 'hsl(' + this.shade + ',100%,' + i + '%)'
+            ctx.arc(point.x, point.y, 1, 0, PI2, false)
+            ctx.fill()
+          }
+        } else {
+          ctx.beginPath()
+          ctx.fillStyle = 'hsl(' + this.shade + ',100%,50%)'
+          ctx.arc(this.x, this.y, 1, 0, PI2, false)
+          ctx.fill()
+        }
+      }
+    }
+
+    let canvas = document.getElementById('birthday')
+    let ctx = canvas.getContext('2d')
+
+    let then = timestamp()
+
+    let birthday = new Birthday()
+    window.onresize = () => birthday.resize()
+    document.onclick = evt => birthday.onClick(evt)
+    document.ontouchstart = evt => birthday.onClick(evt)
+
+    ;(function loop(){
+      requestAnimationFrame(loop)
+
+      let now = timestamp()
+      let delta = now - then
+
+      then = now
+      birthday.update(delta / 1000)
+    })()
+  </script>
+</body>
+</html>
